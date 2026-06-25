@@ -9,32 +9,5 @@
     <!-- Script that runs the headless editing engine -->
     <script src="https://unpkg.com@^3.0.0/dist/decap-cms.js"></script>
 
-    <script>
-    // Universal fail-safe content if the file fails to fetch initially
-    const defaultData = {
-        status_banner: "🟢 Current Status: Open Today until 8:00 PM. Walk-ins Welcome!",
-        hero_title: "Premium Medical Care & <br><span>Luxury Boarding</span> For Your Pets",
-        consult_price: "RM 40 - RM 60"
-    };
-
-    // Apply default content immediately so the screen is never blank
-    document.getElementById('status-banner').innerText = defaultData.status_banner;
-    document.getElementById('hero-title').innerHTML = defaultData.hero_title;
-    document.getElementById('consult-price').innerText = defaultData.consult_price;
-
-    // Fetch live updates from the headless CMS data file
-    fetch('./content.json')
-        .then(response => {
-            if (!response.ok) throw new Error('File not found');
-            return response.json();
-        })
-        .then(data => {
-            if (data.status_banner) document.getElementById('status-banner').innerText = data.status_banner;
-            if (data.hero_title) document.getElementById('hero-title').innerHTML = data.hero_title;
-            if (data.consult_price) document.getElementById('consult-price').innerText = data.consult_price;
-        })
-        .catch(err => console.log("Using default fail-safe site layout data:", err));
-</script>
-
 </body>
 </html>
